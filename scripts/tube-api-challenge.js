@@ -20,7 +20,7 @@ const renderResults = function(result){
   return `
     <div>
       <a class="js-result-name" href="${youtubePrefix}${result.id.videoId}" target="_blank">${result.snippet.title}</a> 
-      <p><img src="${result.snippet.thumbnails.medium.url}" alt="IMAGE"></p>
+      <img src="${result.snippet.thumbnails.medium.url}" alt="IMAGE" data-video-id='${result.id.videoId}'>
     </div>
    `;
   // <div id="myModal" class="modal">
@@ -46,18 +46,21 @@ const displayYoutubeSearchData = function(data) {
   
 };
 
-// const thumbnailClick = function(){
-//   $('.js-search-results').on('click', 'p', event => {
-//     const youtubePrefix = 'https://www.youtube.com/watch?v=';
 
-//     return `
-//     <video width="320" height="240" controls> 
-//       <source src="   need to be able to access videoId  ">
-//     </video>
-//     `;
-//     // $('html').getElementById('img').style.display = 'block';
-//   });
-// };
+
+const thumbnailClick = function(){
+  $('.js-search-results').on('click', 'img', event => {
+    const youtubePrefix = 'https://www.youtube.com/embed/';
+    const currentVidId = $(event.currentTarget).attr('data-video-id');
+    $('.modal-content').html(`<iframe width="420" height="315" src="${youtubePrefix}${currentVidId}?autoplay=1"> </iframe>`);
+    $('.modal').show();
+  });
+};
+
+const modalExitClick = function(){
+  
+}
+
 
 const watchSubmit = function() {
   $('.js-search-form').submit(event => {
@@ -71,7 +74,7 @@ const watchSubmit = function() {
 
 
 const runFunction = function(){
-  // thumbnailClick();
+  thumbnailClick();
   watchSubmit();
 }
 

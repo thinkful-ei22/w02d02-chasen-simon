@@ -39,3 +39,7 @@ img{
   font-size: 35px;
   font-weight: bold;
 }
+
+.cursor:hover {
+  cursor: pointer;
+}
